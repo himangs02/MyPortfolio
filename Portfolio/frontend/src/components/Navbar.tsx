@@ -65,9 +65,6 @@ export default function Navbar() {
     <>
       {/* Theme Toggle & Logo fixed at the top-left */}
       <div className="fixed top-6 left-6 z-50 flex items-center gap-4">
-        <div id="HomeTop" className="flex items-center gap-2 pointer-events-auto">
-          <img className="h-8 md:h-10 dark:invert-0 invert drop-shadow-md transition-all duration-300 hover:scale-105" src="/H-removebg-preview.png" alt="Himangshu Logo" />
-        </div>
         <button onClick={toggleTheme} className="text-xs md:text-sm font-medium tracking-wide border border-slate-300 dark:border-white/10 rounded-full px-4 py-2 hover:bg-slate-200/50 dark:hover:bg-white/10 transition-all cursor-pointer text-slate-800 dark:text-slate-200 bg-white/40 dark:bg-black/20 backdrop-blur-xl pointer-events-auto shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
           {isDark ? 'Light Mode' : 'Dark Mode'}
         </button>
