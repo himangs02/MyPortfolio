@@ -2,12 +2,12 @@ import React from 'react';
 import { 
   SiReact, SiNextdotjs, SiJavascript, SiTypescript, SiHtml5, SiCss, SiBootstrap, SiTailwindcss,
   SiNodedotjs, SiExpress, SiPython,
-  SiMysql, SiMongodb, SiPrisma, SiSequelize, SiSupabase,
+  SiMysql, SiMongodb, SiSequelize, SiSupabase,
   SiC, SiCplusplus, SiR,
-  SiGit, SiGithub, SiPostman, SiVercel, SiRender
+  SiGit, SiGithub, SiPostman, SiVercel
 } from 'react-icons/si';
 import { DiVisualstudio } from 'react-icons/di';
-import { FaBrain, FaNetworkWired, FaProjectDiagram, FaCube } from 'react-icons/fa';
+import { FaBrain, FaNetworkWired, FaProjectDiagram } from 'react-icons/fa';
 
 export default function TechStack() {
   const techs = [
@@ -33,8 +33,6 @@ export default function TechStack() {
     
     { icon: SiExpress, name: "Express", color: "text-black", bg: "bg-[#E5E5E5]", span: "col-span-1 row-span-1" },
     { icon: SiVercel, name: "Vercel", color: "text-white", bg: "bg-black", span: "col-span-1 row-span-1" },
-    { icon: SiPrisma, name: "Prisma", color: "text-white", bg: "bg-[#2D3748]", span: "col-span-2 row-span-1" },
-    
     { icon: SiHtml5, name: "HTML5", color: "text-white", bg: "bg-[#E34F26]", span: "col-span-1 row-span-1" },
     { icon: SiBootstrap, name: "Bootstrap", color: "text-white", bg: "bg-[#7952B3]", span: "col-span-1 row-span-1" },
     { icon: SiSequelize, name: "Sequelize", color: "text-white", bg: "bg-[#52B0E7]", span: "col-span-2 row-span-1" },
