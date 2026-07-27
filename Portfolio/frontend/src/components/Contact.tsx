@@ -15,7 +15,7 @@ export default function Contact() {
     
     try {
       // Assuming backend runs on port 3000 locally
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://himangshu-portfolio-3nma.onrender.com';
       await axios.post(`${backendUrl}/submit`, formData);
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
