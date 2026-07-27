@@ -23,7 +23,7 @@ function App() {
   }
 
   return (
-    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-screen w-full overflow-x-hidden overflow-y-auto snap-y snap-mandatory text-black dark:text-white transition-colors duration-0 relative selection:bg-pink-500 selection:text-white font-sans">
+    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-screen w-full overflow-x-hidden overflow-y-auto text-black dark:text-white transition-colors duration-0 relative selection:bg-pink-500 selection:text-white font-sans">
       <div className="fixed inset-0 pointer-events-none z-0">
         <CursorGrid
           cellSize={60}

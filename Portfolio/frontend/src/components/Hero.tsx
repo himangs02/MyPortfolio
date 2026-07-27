@@ -41,7 +41,10 @@ export default function Hero() {
               onClick={() => {
                 const el = document.getElementById('About');
                 const container = document.getElementById('scroll-container');
-                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el && container) {
+                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                  window.history.pushState(null, '', '#About');
+                }
               }}
               className="inline-block h-14 px-8 font-bold text-black bg-[#FF0055] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
             >
@@ -51,7 +54,10 @@ export default function Hero() {
               onClick={() => {
                 const el = document.getElementById('Contact');
                 const container = document.getElementById('scroll-container');
-                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el && container) {
+                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                  window.history.pushState(null, '', '#Contact');
+                }
               }}
               className="inline-block h-14 px-8 font-bold text-black bg-[#00E5FF] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
             >
@@ -61,7 +67,10 @@ export default function Hero() {
               onClick={() => {
                 const el = document.getElementById('Work');
                 const container = document.getElementById('scroll-container');
-                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el && container) {
+                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                  window.history.pushState(null, '', '#Work');
+                }
               }}
               className="inline-block h-14 px-8 font-bold text-black bg-[#FFEB3B] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
             >

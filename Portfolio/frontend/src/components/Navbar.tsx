@@ -69,8 +69,10 @@ export default function Navbar() {
         top: targetScrollTop,
         behavior: 'smooth'
       });
+      window.history.pushState(null, '', `#${item}`);
     } else if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', `#${item}`);
     }
   };
 
