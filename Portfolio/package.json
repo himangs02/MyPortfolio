@@ -1,17 +1,12 @@
 {
-  "name": "portfolio",
+  "name": "portfolio-root",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Root package for managing both frontend and backend",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "dotenv": "^17.0.1",
-    "express": "^5.1.0",
-    "mongoose": "^8.16.1"
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
