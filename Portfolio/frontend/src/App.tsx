@@ -7,10 +7,13 @@ import TechStack from './components/TechStack';
 import Work from './components/Work';
 import Contact from './components/Contact';
 import CursorGrid from './components/ui/CursorGrid';
+import CustomCursor from './components/CustomCursor';
 import './App.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [cursorColor, setCursorColor] = useState('#00FF66');
+  const [cursorShape, setCursorShape] = useState<'square' | 'circle' | 'cross'>('square');
 
   useEffect(() => {
     // Simulate loading assets or data
@@ -23,11 +26,12 @@ function App() {
   }
 
   return (
-    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-screen w-full overflow-x-hidden overflow-y-auto text-black dark:text-white transition-colors duration-0 relative selection:bg-pink-500 selection:text-white font-sans">
+    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-screen w-full overflow-x-hidden overflow-y-auto scroll-smooth snap-y snap-mandatory text-black dark:text-white transition-colors duration-0 relative selection:bg-pink-500 selection:text-white font-sans md:cursor-none no-scrollbar">
+      <CustomCursor color={cursorColor} shape={cursorShape} />
       <div className="fixed inset-0 pointer-events-none z-0">
         <CursorGrid
           cellSize={60}
-          color="#FF0055"
+          color={cursorColor}
           radius={180}
           falloff="linear"
           holdTime={200}
@@ -42,9 +46,14 @@ function App() {
         />
       </div>
       <div className="relative z-10">
-        <Navbar />
+        <Navbar 
+          cursorColor={cursorColor} 
+          setCursorColor={setCursorColor} 
+          cursorShape={cursorShape}
+          setCursorShape={setCursorShape}
+        />
         <main className="flex flex-col gap-10">
-          <Hero />
+          <Hero cursorColor={cursorColor} />
           <About />
           <TechStack />
           <Work />

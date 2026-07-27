@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import OptionWheel from './ui/OptionWheel';
+import { motion } from 'motion/react';
 
 const navItems = ['Home', 'About', 'TechStack', 'Work', 'Contact'];
 
-export default function Navbar() {
+export default function Navbar({ 
+  cursorColor = '#00FF66', 
+  setCursorColor,
+  cursorShape = 'square',
+  setCursorShape
+}: { 
+  cursorColor?: string, 
+  setCursorColor?: (c: string) => void,
+  cursorShape?: 'square' | 'circle' | 'cross',
+  setCursorShape?: (s: 'square' | 'circle' | 'cross') => void
+}) {
   const [isDark, setIsDark] = useState(true);
-
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isHoveringTop, setIsHoveringTop] = useState(false);
+
+  const colors = ['#00FF66', '#00E5FF', '#FF0055', '#FFEB3B', '#B497CF'];
+  const shapes = ['square', 'circle', 'cross'] as const;
 
   useEffect(() => {
     // Check initial theme from localStorage
@@ -42,6 +55,20 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Track mouse movement to reveal navbar when near top
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (e.clientY < 120) {
+        setIsHoveringTop(true);
+      } else {
+        setIsHoveringTop(false);
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.remove('dark');
@@ -54,45 +81,139 @@ export default function Navbar() {
     }
   };
 
-  const handleNavChange = (index: number, item: string) => {
-    const el = document.getElementById(item);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      window.history.pushState(null, '', `#${item}`);
-    }
-  };
+  const isNavbarVisible = selectedIndex === 0 || isHoveringTop;
 
   return (
     <>
       {/* Theme Toggle & Logo fixed at the top-left */}
-      <div className="fixed top-6 left-6 z-50 flex items-center gap-4">
-        <button onClick={toggleTheme} className="text-xs md:text-sm font-medium tracking-wide border border-slate-300 dark:border-white/10 rounded-full px-4 py-2 hover:bg-slate-200/50 dark:hover:bg-white/10 transition-all cursor-pointer text-slate-800 dark:text-slate-200 bg-white/40 dark:bg-black/20 backdrop-blur-xl pointer-events-auto shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
+      <motion.div 
+        className="fixed top-6 md:top-8 left-6 z-50 flex items-center gap-2 pointer-events-auto"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: isNavbarVisible ? 0 : -100, opacity: isNavbarVisible ? 1 : 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <button 
+          onClick={toggleTheme} 
+          className="text-xs md:text-sm font-medium tracking-wide rounded-full px-4 py-2 hover:bg-slate-100 dark:hover:bg-[#222] transition-all cursor-none bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.1)] h-10 border-2"
+          style={{ borderColor: cursorColor, color: cursorColor }}
+        >
           {isDark ? 'Light Mode' : 'Dark Mode'}
         </button>
-      </div>
+      </motion.div>
 
-      {/* Vertical OptionWheel on the right side */}
-      <div className="fixed right-0 top-0 h-full w-[160px] md:w-[250px] lg:w-[350px] z-40 pointer-events-none">
-        <div className="pointer-events-auto h-full w-full">
-          <OptionWheel
-            items={navItems}
-            defaultSelected={0}
-            selectedIndex={selectedIndex}
-            textColor="#64748b"
-            activeColor={isDark ? "#06b6d4" : "#0284c7"}
-            side="right"
-            fontSize={1.4}
-            spacing={2}
-            curve={1}
-            tilt={8}
-            blur={2}
-            fade={0.3}
-            smoothing={200}
-            inset={30}
-            draggable
-            onChange={handleNavChange}
-          />
-        </div>
+      {/* Cursor Customization fixed at the top-right */}
+      <motion.div 
+        className="fixed top-6 md:top-8 right-6 z-50 flex items-center gap-2 pointer-events-auto"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: isNavbarVisible ? 0 : -100, opacity: isNavbarVisible ? 1 : 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        {/* Cursor Color & Shape Selector */}
+        {setCursorColor && (
+          <div 
+            className="hidden md:flex items-center gap-2 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-xl rounded-full px-3 h-10 shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-2"
+            style={{ borderColor: cursorColor }}
+          >
+            {colors.map(c => (
+              <button
+                key={c}
+                onClick={() => setCursorColor(c)}
+                className={`w-5 h-5 rounded-full border-2 transition-all cursor-none ${cursorColor === c ? 'scale-125 shadow-[0_0_8px_rgba(0,0,0,0.2)]' : 'border-transparent hover:scale-110'}`}
+                style={{ backgroundColor: c, borderColor: cursorColor === c ? (document.documentElement.classList.contains('dark') ? 'white' : 'black') : 'transparent' }}
+                aria-label={`Set cursor color to ${c}`}
+              />
+            ))}
+            
+            {/* Shape Divider */}
+            {setCursorShape && (
+              <div className="w-px h-4 bg-slate-300 dark:bg-slate-700 mx-1" />
+            )}
+            
+            {/* Shape Selector */}
+            {setCursorShape && shapes.map(s => (
+              <button
+                key={s}
+                onClick={() => setCursorShape(s)}
+                className={`w-6 h-6 flex items-center justify-center transition-all cursor-none ${cursorShape === s ? 'scale-110' : 'text-slate-400 hover:scale-105'}`}
+                style={{ color: cursorShape === s ? cursorColor : undefined }}
+                aria-label={`Set cursor shape to ${s}`}
+              >
+                {s === 'square' && <div className="w-3.5 h-3.5 border-2 border-current" />}
+                {s === 'circle' && <div className="w-4 h-4 border-2 border-current rounded-full" />}
+                {s === 'cross' && (
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 stroke-current stroke-2 fill-none">
+                    <line x1="12" y1="4" x2="12" y2="20" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                  </svg>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+      </motion.div>
+
+      {/* Floating Pill Navbar at the top */}
+      <motion.div 
+        className="fixed top-6 md:top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
+        initial={{ y: -100, opacity: 0, x: "-50%" }}
+        animate={{ y: isNavbarVisible ? 0 : -100, opacity: isNavbarVisible ? 1 : 0, x: "-50%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <nav className="flex items-center gap-1 p-1.5 md:p-2 bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-2xl border border-slate-200 dark:border-[#222] rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
+          {navItems.map((item, index) => {
+            const isActive = selectedIndex === index;
+            return (
+              <a
+                key={item}
+                href={`#${item}`}
+                onClick={() => setSelectedIndex(index)}
+                className={`relative px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium tracking-wide transition-colors cursor-none ${
+                  isActive 
+                    ? 'text-black' 
+                    : 'text-slate-600 dark:text-slate-400 hover:text-black dark:hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 rounded-full -z-10 shadow-lg"
+                    style={{ backgroundColor: cursorColor }}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{item}</span>
+              </a>
+            );
+          })}
+        </nav>
+      </motion.div>
+
+      {/* Side Scroll Indicator (Dots Only) */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-3 pointer-events-auto">
+        {navItems.map((item, index) => {
+          const isActive = selectedIndex === index;
+          return (
+            <a
+              key={item}
+              href={`#${item}`}
+              onClick={() => setSelectedIndex(index)}
+              className="group relative flex items-center justify-center p-2 outline-none block"
+              aria-label={`Scroll to ${item}`}
+            >
+              <div 
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  isActive 
+                    ? 'scale-150' 
+                    : 'opacity-40 hover:opacity-100 hover:scale-125'
+                }`}
+                style={{ 
+                  backgroundColor: isActive ? cursorColor : (document.documentElement.classList.contains('dark') ? '#888' : '#666'),
+                  boxShadow: isActive ? `0 0 10px ${cursorColor}` : 'none'
+                }} 
+              />
+            </a>
+          );
+        })}
       </div>
     </>
   );

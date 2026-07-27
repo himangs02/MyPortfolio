@@ -2,11 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import Terminal from './terminal/Terminal';
 
-export default function Hero() {
+export default function Hero({ cursorColor = '#00FF66' }: { cursorColor?: string }) {
   const [mounted, setMounted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setMounted(true);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Calculate mouse position relative to the center of the screen
+      const x = e.clientX - window.innerWidth / 2;
+      const y = e.clientY - window.innerHeight / 2;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -40,36 +51,30 @@ export default function Hero() {
             <button 
               onClick={() => {
                 const el = document.getElementById('About');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                  window.history.pushState(null, '', '#About');
-                }
+                const container = document.getElementById('scroll-container');
+                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
               }}
-              className="inline-block h-14 px-8 font-bold text-black bg-[#FF0055] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
+              className="inline-block h-14 px-8 font-bold text-black bg-[#FF0055] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-none"
             >
               Get Started
             </button>
             <button 
               onClick={() => {
                 const el = document.getElementById('Contact');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                  window.history.pushState(null, '', '#Contact');
-                }
+                const container = document.getElementById('scroll-container');
+                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
               }}
-              className="inline-block h-14 px-8 font-bold text-black bg-[#00E5FF] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
+              className="inline-block h-14 px-8 font-bold text-black bg-[#00E5FF] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-none"
             >
               Contact me
             </button>
             <button 
               onClick={() => {
                 const el = document.getElementById('Work');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                  window.history.pushState(null, '', '#Work');
-                }
+                const container = document.getElementById('scroll-container');
+                if (el && container) container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
               }}
-              className="inline-block h-14 px-8 font-bold text-black bg-[#FFEB3B] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-pointer"
+              className="inline-block h-14 px-8 font-bold text-black bg-[#FFEB3B] border-4 border-black hover:-translate-y-1 hover:translate-x-1 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[0px_0px_0px_0px_rgba(255,255,255,1)] transition-all uppercase tracking-wide cursor-none"
             >
               My Work
             </button>
@@ -81,19 +86,9 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
           animate={{ opacity: mounted ? 1 : 0, scale: mounted ? 1 : 0.9, rotate: mounted ? 0 : 2 }}
           transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
-          className="flex-1 hidden md:flex justify-center relative mt-10 md:mt-0"
+          className="flex-1 hidden md:flex justify-center relative mt-10 md:mt-0 z-10"
         >
-          {/* Decorative floating elements behind terminal */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="absolute -top-10 -right-4 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-[#FFEB3B] border-4 md:border-8 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center z-0"
-            style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%' }}
-          >
-            <span className="font-black text-black text-lg md:text-xl -rotate-12">CODE</span>
-          </motion.div>
-
-          <Terminal />
+          <Terminal cursorColor={cursorColor} />
         </motion.div>
       </motion.div>
     </div>

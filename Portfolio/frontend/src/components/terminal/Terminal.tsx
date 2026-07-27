@@ -8,7 +8,7 @@ interface HistoryItem {
   output: React.ReactNode;
 }
 
-export default function Terminal() {
+export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: string }) {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -17,9 +17,48 @@ export default function Terminal() {
   
   const [isMinimized, setIsMinimized] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  const playTypingSound = () => {
+    if (isMuted) return;
+    
+    try {
+      if (!audioCtxRef.current) {
+        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        audioCtxRef.current = new AudioContext();
+      }
+      
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      // Soft, futuristic 'blip' or 'tick' sound
+      osc.type = 'sine';
+      // High frequency that drops extremely quickly for a 'click' feel
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.02);
+      
+      // Very low volume, fast fade out
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      osc.start();
+      osc.stop(ctx.currentTime + 0.02);
+    } catch (e) {
+      // Ignore audio errors (e.g. if AudioContext is not supported or blocked)
+    }
+  };
 
   // Initial welcome message
   const getWelcomeMessage = () => ({
@@ -70,6 +109,11 @@ export default function Terminal() {
   }, [isMinimized]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Play sound on every key press (except modifiers like Shift/Ctrl/Alt which don't produce characters, though we could play it for all)
+    if (e.key !== 'Shift' && e.key !== 'Control' && e.key !== 'Alt' && e.key !== 'Meta') {
+      playTypingSound();
+    }
+
     if (e.key === 'Enter') {
       executeCommand();
     } else if (e.key === 'ArrowUp') {
@@ -194,7 +238,7 @@ export default function Terminal() {
       onClick={() => !isMinimized && inputRef.current?.focus()}
     >
       {isMaximized && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] cursor-pointer" onClick={() => setIsMaximized(false)} />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[-1] cursor-none" onClick={() => setIsMaximized(false)} />
       )}
       
       {/* Terminal Header */}
@@ -205,12 +249,12 @@ export default function Terminal() {
               setHistory([getWelcomeMessage()]);
               setHistoryIdCounter(0);
             }}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#FF0055] border-2 md:border-4 border-black dark:border-white rounded-full cursor-pointer hover:brightness-110 active:scale-95"
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#FF0055] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
             title="Clear Terminal"
           />
           <button 
             onClick={() => setIsMinimized(!isMinimized)}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#FFEB3B] border-2 md:border-4 border-black dark:border-white rounded-full cursor-pointer hover:brightness-110 active:scale-95"
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#FFEB3B] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
             title={isMinimized ? "Expand" : "Minimize"}
           />
           <button 
@@ -218,13 +262,35 @@ export default function Terminal() {
               if (isMinimized) setIsMinimized(false);
               setIsMaximized(!isMaximized);
             }}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#00FF66] border-2 md:border-4 border-black dark:border-white rounded-full cursor-pointer hover:brightness-110 active:scale-95"
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#00FF66] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
             title={isMaximized ? "Restore" : "Maximize"}
           />
         </div>
-        <span className="text-black dark:text-white font-black uppercase text-[10px] md:text-xs tracking-widest">
-          guest@himangshu:~
-        </span>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setIsMuted(!isMuted)}
+            className="hover:opacity-70 transition-opacity cursor-none"
+            style={{ color: cursorColor }}
+            title={isMuted ? "Unmute Typing Sound" : "Mute Typing Sound"}
+          >
+            {isMuted ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+            )}
+          </button>
+          <span className="text-black dark:text-white font-black uppercase text-[10px] md:text-xs tracking-widest">
+            guest@himangshu:~
+          </span>
+        </div>
       </div>
       
       {/* Terminal Body */}

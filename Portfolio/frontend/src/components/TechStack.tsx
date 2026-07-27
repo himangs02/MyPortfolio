@@ -75,7 +75,7 @@ export default function TechStack() {
             return (
               <div 
                 key={idx} 
-                className={`group flex flex-col justify-center items-center ${tech.bg} ${tech.span} border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 cursor-pointer ${isLarge ? 'gap-2 p-4' : 'gap-1 p-2'}`}
+                className={`group flex flex-col justify-center items-center ${tech.bg} ${tech.span} border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 cursor-none ${isLarge ? 'gap-2 p-4' : 'gap-1 p-2'}`}
                 title={tech.name}
               >
                 <Icon className={`${isLarge ? 'w-10 h-10 md:w-12 md:h-12' : 'w-5 h-5 md:w-7 md:h-7'} ${tech.color} group-hover:scale-110 transition-transform duration-300`} />
