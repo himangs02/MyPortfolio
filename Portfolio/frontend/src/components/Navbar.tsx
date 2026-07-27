@@ -56,21 +56,7 @@ export default function Navbar() {
 
   const handleNavChange = (index: number, item: string) => {
     const el = document.getElementById(item);
-    const container = document.getElementById('scroll-container');
-    
-    if (el && container) {
-      // Calculate exact position accounting for relative offset
-      const containerRect = container.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      
-      const targetScrollTop = container.scrollTop + (elRect.top - containerRect.top);
-      
-      container.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      });
-      window.history.pushState(null, '', `#${item}`);
-    } else if (el) {
+    if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
       window.history.pushState(null, '', `#${item}`);
     }

@@ -40,9 +40,8 @@ export default function Hero() {
             <button 
               onClick={() => {
                 const el = document.getElementById('About');
-                const container = document.getElementById('scroll-container');
-                if (el && container) {
-                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
                   window.history.pushState(null, '', '#About');
                 }
               }}
@@ -53,9 +52,8 @@ export default function Hero() {
             <button 
               onClick={() => {
                 const el = document.getElementById('Contact');
-                const container = document.getElementById('scroll-container');
-                if (el && container) {
-                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
                   window.history.pushState(null, '', '#Contact');
                 }
               }}
@@ -66,9 +64,8 @@ export default function Hero() {
             <button 
               onClick={() => {
                 const el = document.getElementById('Work');
-                const container = document.getElementById('scroll-container');
-                if (el && container) {
-                  container.scrollTo({ top: container.scrollTop + (el.getBoundingClientRect().top - container.getBoundingClientRect().top), behavior: 'smooth' });
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
                   window.history.pushState(null, '', '#Work');
                 }
               }}
