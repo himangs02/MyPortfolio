@@ -22,8 +22,8 @@ const formSchema=new mongoose.Schema({
     name:String,
     email:String,
     message:String
-})
-const Form=mongoose.model("Form",formSchema);
+}, { collection: 'user' });
+const Form=mongoose.model("user",formSchema);
 app.post("/submit",async(req,res)=>{
     try {
         console.log("BODY RECEIVED:", req.body);
