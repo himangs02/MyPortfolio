@@ -69,7 +69,7 @@ export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: st
           <span className="text-[#FF0055] font-bold">{`>`}</span>
           <span className="text-white font-bold">npm install dev-skills</span>
         </p>
-        <div className="text-[#00E5FF] font-medium pl-3 md:pl-4 border-l-2 border-[#333333] space-y-1">
+        <div className="text-[var(--cursor-color)] font-medium pl-3 md:pl-4 border-l-2 border-[#333333] space-y-1">
           <p>[+] React, Next.js, TypeScript added.</p>
           <p>[+] Node.js, Express, MongoDB linked.</p>
           <p>[+] Neo-Brutalism UI activated.</p>
@@ -163,7 +163,7 @@ export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: st
           </p>
           <div className="flex flex-wrap gap-4 mt-1">
             {matches.map(match => (
-              <span key={match} className="text-[#00E5FF]">{match}</span>
+              <span key={match} className="text-[var(--cursor-color)]">{match}</span>
             ))}
           </div>
         </div>
@@ -245,24 +245,29 @@ export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: st
       <div className="bg-white dark:bg-black border-b-4 md:border-b-8 border-black dark:border-white px-3 py-2 md:px-4 md:py-3 flex items-center justify-between sticky top-0 z-20">
         <div className="flex gap-2">
           <button 
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setHistory([getWelcomeMessage()]);
               setHistoryIdCounter(0);
             }}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#FF0055] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#FF0055] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95 pointer-events-auto"
             title="Clear Terminal"
           />
           <button 
-            onClick={() => setIsMinimized(!isMinimized)}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#FFEB3B] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMinimized(!isMinimized);
+            }}
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#FFEB3B] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95 pointer-events-auto"
             title={isMinimized ? "Expand" : "Minimize"}
           />
           <button 
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               if (isMinimized) setIsMinimized(false);
               setIsMaximized(!isMaximized);
             }}
-            className="w-4 h-4 md:w-5 md:h-5 bg-[#00FF66] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95"
+            className="w-4 h-4 md:w-5 md:h-5 bg-[#00FF66] border-2 md:border-4 border-black dark:border-white rounded-full cursor-none hover:brightness-110 active:scale-95 pointer-events-auto"
             title={isMaximized ? "Restore" : "Maximize"}
           />
         </div>

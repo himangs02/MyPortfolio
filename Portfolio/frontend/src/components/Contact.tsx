@@ -26,22 +26,22 @@ export default function Contact() {
   };
 
   return (
-    <div id="Contact" className="min-h-[100svh] w-full py-10 md:py-16 flex flex-col justify-center items-center snap-start bg-transparent relative">
+    <div id="Contact" className="min-h-[100svh] w-full py-12 sm:py-16 md:py-20 flex flex-col justify-center items-center snap-start bg-transparent relative px-3 sm:px-6">
       
       {/* Professional Header */}
-      <div className="flex flex-col items-center justify-center text-center gap-2 md:gap-3 mb-8 md:mb-10 px-4 z-10">
-        <div className="inline-block bg-[#FF0055] text-black font-bold uppercase tracking-widest text-xs px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-2">
+      <div className="flex flex-col items-center justify-center text-center gap-2 md:gap-3 mb-6 sm:mb-8 md:mb-10 px-4 z-10">
+        <div className="inline-block bg-[#FF0055] text-black font-bold uppercase tracking-widest text-[10px] sm:text-xs px-3 py-1 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-2">
           Get in Touch
         </div>
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_#00E5FF]">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,4px_4px_0_var(--cursor-color)] sm:[text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_var(--cursor-color)]">
           Contact Me
         </h1>
-        <p className="text-black dark:text-white font-medium max-w-2xl mt-1 text-sm md:text-base bg-white dark:bg-[#111111] p-2 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+        <p className="text-black dark:text-white font-medium max-w-2xl mt-1 text-xs sm:text-sm md:text-base bg-white dark:bg-[#111111] p-2 border-3 sm:border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] sm:dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
           Have a project in mind or just want to say hi? Feel free to reach out.
         </p>
       </div>
 
-      <div className="w-[90vw] md:w-[60vw] lg:w-[40vw] mx-auto bg-[#FFEB3B] rounded-none shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] border-4 border-black p-6 md:p-8 relative overflow-hidden z-10">
+      <div className="w-[94vw] sm:w-[85vw] md:w-[60vw] lg:w-[45vw] xl:w-[35vw] mx-auto bg-[#FFEB3B] rounded-none shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] sm:dark:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] border-3 sm:border-4 border-black p-4 sm:p-6 md:p-8 relative overflow-hidden z-10">
 
         <form onSubmit={handleSubmit} className="w-full space-y-4 text-black relative z-10">
           <div>
@@ -53,7 +53,7 @@ export default function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full bg-white border-4 border-black px-4 py-3 outline-none focus:bg-[#00E5FF] transition-colors text-base font-bold placeholder-gray-500 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+              className="w-full bg-white border-4 border-black px-4 py-3 outline-none focus:bg-[var(--cursor-color)] transition-colors text-base font-bold placeholder-gray-500 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
             />
           </div>
 

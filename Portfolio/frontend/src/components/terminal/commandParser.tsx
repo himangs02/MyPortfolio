@@ -58,7 +58,7 @@ export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispa
         <div className="flex flex-col gap-6">
           {PROJECTS_DATA.map((project, index) => (
             <div key={index} className="flex flex-col gap-1 border-l-2 border-[#333] pl-4">
-              <span className="font-bold text-[#00E5FF] text-lg">{project.name}</span>
+              <span className="font-bold text-[var(--cursor-color)] text-lg">{project.name}</span>
               <span>{project.description}</span>
               <span className="text-[#00FF66]">Tech: {project.techStack.join(', ')}</span>
               <div className="flex gap-4 mt-2">
@@ -89,7 +89,7 @@ export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispa
         <div className="flex flex-col gap-4">
           {EDUCATION_DATA.map((edu, index) => (
             <div key={index} className="flex flex-col gap-1 border-l-2 border-[#333] pl-4">
-              <span className="font-bold text-[#00E5FF]">{edu.degree}</span>
+              <span className="font-bold text-[var(--cursor-color)]">{edu.degree}</span>
               <span className="text-white">{edu.institution}</span>
               <span className="opacity-80">{edu.year}</span>
             </div>
@@ -101,7 +101,7 @@ export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispa
       return (
         <div className="flex flex-col gap-2">
           <span><span className="font-bold text-[#FF0055]">Email:</span> {TERMINAL_CONFIG.email}</span>
-          <span><span className="font-bold text-[#00E5FF]">LinkedIn:</span> {TERMINAL_CONFIG.linkedin}</span>
+          <span><span className="font-bold text-[var(--cursor-color)]">LinkedIn:</span> {TERMINAL_CONFIG.linkedin}</span>
           <span><span className="font-bold text-[#00FF66]">GitHub:</span> {TERMINAL_CONFIG.github}</span>
           <span><span className="font-bold text-[#FFEB3B]">Portfolio:</span> {TERMINAL_CONFIG.portfolio}</span>
         </div>
@@ -130,7 +130,7 @@ export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispa
 
     case 'joke':
       const randomJoke = JOKES[Math.floor(Math.random() * JOKES.length)];
-      return <span className="text-[#00E5FF]">{randomJoke}</span>;
+      return <span className="text-[var(--cursor-color)]">{randomJoke}</span>;
 
     case 'weather':
       return <span>Currently: 22°C, mostly sunny with a chance of bugs.</span>;

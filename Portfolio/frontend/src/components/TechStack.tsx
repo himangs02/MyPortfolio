@@ -45,41 +45,41 @@ export default function TechStack() {
     { icon: FaBrain, name: "AI", color: "text-white", bg: "bg-[#8A2BE2]", span: "col-span-1 row-span-1" },
 
     { icon: FaNetworkWired, name: "Machine Learning", color: "text-black", bg: "bg-[#00FF66]", span: "col-span-2 row-span-1" },
-    { icon: FaProjectDiagram, name: "System Design", color: "text-black", bg: "bg-[#00E5FF]", span: "col-span-2 row-span-1" },
+    { icon: FaProjectDiagram, name: "System Design", color: "text-black", bg: "bg-[var(--cursor-color)]", span: "col-span-2 row-span-1" },
   ];
 
   return (
     <div 
       id="TechStack" 
-      className="relative min-h-screen w-full leading-tight py-8 md:py-12 flex flex-col justify-center items-center overflow-hidden bg-transparent snap-start"
+      className="relative min-h-[100svh] w-full leading-tight py-12 sm:py-16 md:py-20 flex flex-col justify-center items-center overflow-hidden bg-transparent snap-start px-3 sm:px-6"
     >
       
       {/* Professional Header */}
-      <div className="relative z-30 flex flex-col items-center justify-center text-center gap-2 mb-6 px-4">
-        <div className="inline-block bg-[#00FF66] text-black font-bold uppercase tracking-widest text-xs px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-2">
+      <div className="relative z-30 flex flex-col items-center justify-center text-center gap-2 mb-6 sm:mb-8 px-4">
+        <div className="inline-block bg-[#00FF66] text-black font-bold uppercase tracking-widest text-[10px] sm:text-xs px-3 py-1 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-2">
           Expertise
         </div>
-        <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,5px_5px_0_#FF0055]">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,4px_4px_0_#FF0055] sm:[text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,5px_5px_0_#FF0055]">
           Tech Stack
         </h1>
-        <p className="text-black dark:text-white font-medium max-w-2xl mt-1 text-sm md:text-base bg-white dark:bg-[#111111] p-2 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+        <p className="text-black dark:text-white font-medium max-w-2xl mt-1 text-xs sm:text-sm md:text-base bg-white dark:bg-[#111111] p-2 border-3 sm:border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] sm:dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
           A collection of technologies, languages, and tools I use to build beautiful, scalable, and high-performance applications.
         </p>
       </div>
 
       {/* Bento Grid */}
-      <div className="relative z-10 w-[95vw] md:w-[90vw] lg:w-[85vw] grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 auto-rows-[70px] md:auto-rows-[80px]">
+      <div className="relative z-10 w-[95vw] sm:w-[90vw] lg:w-[85vw] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-3 md:gap-4 auto-rows-[65px] sm:auto-rows-[75px] md:auto-rows-[80px]">
           {techs.map((tech, idx) => {
             const Icon = tech.icon;
             const isLarge = tech.span.includes('row-span-2');
             return (
               <div 
                 key={idx} 
-                className={`group flex flex-col justify-center items-center ${tech.bg} ${tech.span} border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 cursor-none ${isLarge ? 'gap-2 p-4' : 'gap-1 p-2'}`}
+                className={`group flex flex-col justify-center items-center ${tech.bg} ${tech.span} border-3 sm:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:translate-x-1 transition-all duration-300 cursor-none ${isLarge ? 'gap-1.5 sm:gap-2 p-2 sm:p-4' : 'gap-1 p-1 sm:p-2'}`}
                 title={tech.name}
               >
-                <Icon className={`${isLarge ? 'w-10 h-10 md:w-12 md:h-12' : 'w-5 h-5 md:w-7 md:h-7'} ${tech.color} group-hover:scale-110 transition-transform duration-300`} />
-                <span className={`${isLarge ? 'text-sm md:text-base font-black' : 'text-[10px] md:text-xs font-bold'} opacity-90 group-hover:opacity-100 ${tech.color} text-center tracking-wide uppercase`}>
+                <Icon className={`${isLarge ? 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12' : 'w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7'} ${tech.color} group-hover:scale-110 transition-transform duration-300`} />
+                <span className={`${isLarge ? 'text-xs sm:text-sm md:text-base font-black' : 'text-[9px] sm:text-[10px] md:text-xs font-bold'} opacity-90 group-hover:opacity-100 ${tech.color} text-center tracking-wide uppercase`}>
                   {tech.name}
                 </span>
               </div>

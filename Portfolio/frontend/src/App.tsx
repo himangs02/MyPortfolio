@@ -21,12 +21,16 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty('--cursor-color', cursorColor);
+  }, [cursorColor]);
+
   if (loading) {
     return <LoaderThreeDemo />;
   }
 
   return (
-    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-screen w-full overflow-x-hidden overflow-y-auto scroll-smooth snap-y snap-mandatory text-black dark:text-white transition-colors duration-0 relative selection:bg-pink-500 selection:text-white font-sans md:cursor-none no-scrollbar">
+    <div id="scroll-container" className="bg-[#F4F4F0] dark:bg-[#0A0A0A] h-[100svh] w-full overflow-x-hidden overflow-y-auto scroll-smooth snap-y snap-mandatory text-black dark:text-white transition-colors duration-0 relative selection:bg-[var(--cursor-color)] selection:text-black dark:selection:text-white font-sans md:cursor-none no-scrollbar">
       <CustomCursor color={cursorColor} shape={cursorShape} />
       <div className="fixed inset-0 pointer-events-none z-0">
         <CursorGrid

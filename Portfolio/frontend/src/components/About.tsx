@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 
 export default function About() {
   return (
-    <div id="About" className="snap-start py-[10vh] min-h-screen flex flex-col justify-center items-center w-full overflow-hidden relative">
+    <div id="About" className="snap-start py-12 sm:py-16 md:py-24 min-h-[100svh] flex flex-col justify-center items-center w-full overflow-hidden relative px-3 sm:px-6">
       
       {/* Professional Header */}
       <motion.div 
@@ -12,17 +12,17 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-col items-center justify-center text-center gap-3 mb-16 px-4 z-10"
+        className="flex flex-col items-center justify-center text-center gap-2 sm:gap-3 mb-8 sm:mb-12 md:mb-16 px-4 z-10"
       >
-        <div className="inline-block bg-[#FFEB3B] text-black font-bold uppercase tracking-widest text-xs md:text-sm px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
+        <div className="inline-block bg-[#FFEB3B] text-black font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm px-3 py-1 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1">
           Discover
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_#00E5FF]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,4px_4px_0_var(--cursor-color)] sm:[text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_var(--cursor-color)]">
           About Me
         </h1>
       </motion.div>
 
-      <div className="w-[90vw] lg:w-[80vw] flex flex-col lg:flex-row gap-12 lg:gap-20 items-center mx-auto z-10">
+      <div className="w-[94vw] sm:w-[88vw] lg:w-[80vw] flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-20 items-center mx-auto z-10">
         
         {/* Left: Bio */}
         <motion.div 
@@ -30,9 +30,9 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="flex-1 flex flex-col gap-8 w-full border-4 border-black bg-white dark:bg-[#111111] p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)]"
+          className="flex-1 flex flex-col gap-6 sm:gap-8 w-full border-3 sm:border-4 border-black bg-white dark:bg-[#111111] p-4 sm:p-6 md:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] sm:dark:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)]"
         >
-          <div className="flex items-center min-h-[4rem] text-2xl md:text-3xl font-bold text-black dark:text-white uppercase border-b-4 border-black dark:border-white pb-4">
+          <div className="flex items-center min-h-[3.5rem] sm:min-h-[4rem] text-xl sm:text-2xl md:text-3xl font-bold text-black dark:text-white uppercase border-b-2 sm:border-b-4 border-black dark:border-white pb-3 sm:pb-4">
             <LayoutTextFlip
               text="I'm "
               words={[
@@ -65,7 +65,7 @@ export default function About() {
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-6">
             
             {/* LinkedIn */}
-            <a href="https://www.linkedin.com/in/himangshu-kumar-das-1349b6320" target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-6 w-full h-full bg-[#00E5FF] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:translate-x-2 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all">
+            <a href="https://www.linkedin.com/in/himangshu-kumar-das-1349b6320" target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-6 w-full h-full bg-[var(--cursor-color)] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:translate-x-2 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all">
               <svg className="w-12 h-12 mb-3 text-black" viewBox="0 0 16 16" fill="currentColor"><path d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 01-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 002 2.866v10.268a.88.88 0 00.885.866h10.226a.882.882 0 00.889-.866V2.865a.88.88 0 00-.889-.864z"></path></svg>
               <span className="text-base font-black tracking-wide text-black uppercase">LinkedIn</span>
             </a>

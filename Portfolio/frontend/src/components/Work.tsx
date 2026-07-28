@@ -2,19 +2,19 @@ import React from 'react';
 
 export default function Work() {
   return (
-    <div id="Work" className="min-h-screen snap-start py-[10vh] flex flex-col justify-center items-center w-full bg-transparent relative">
+    <div id="Work" className="min-h-[100svh] snap-start py-12 sm:py-16 md:py-24 flex flex-col justify-center items-center w-full bg-transparent relative px-3 sm:px-6">
       
       {/* Professional Header */}
-      <div className="flex flex-col items-center justify-center text-center gap-3 mb-16 px-4 z-10">
-        <div className="inline-block bg-[#00E5FF] text-black font-bold uppercase tracking-widest text-xs md:text-sm px-3 py-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-2">
+      <div className="flex flex-col items-center justify-center text-center gap-2 sm:gap-3 mb-8 sm:mb-12 md:mb-16 px-4 z-10">
+        <div className="inline-block bg-[var(--cursor-color)] text-black font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm px-3 py-1 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-2">
           Portfolio
         </div>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_#FFEB3B]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,4px_4px_0_#FFEB3B] sm:[text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_#FFEB3B]">
           Featured Projects
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-[90vw] md:w-[85vw] mx-auto relative group z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-[94vw] sm:w-[90vw] md:w-[85vw] mx-auto relative group z-10">
         
         {/* Project 1 */}
         <div className="relative flex flex-col justify-between items-start rounded-none shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:translate-x-2 transition-all duration-300 group/card bg-[#FF0055] p-6 border-4 border-black h-full">
