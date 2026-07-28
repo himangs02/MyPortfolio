@@ -99,14 +99,6 @@ export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: st
     }
   }, [history, isMinimized, isMaximized]);
 
-  // Keep focus on input
-  useEffect(() => {
-    const handleClick = () => {
-      if (!isMinimized) inputRef.current?.focus();
-    };
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, [isMinimized]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // Play sound on every key press (except modifiers like Shift/Ctrl/Alt which don't produce characters, though we could play it for all)
