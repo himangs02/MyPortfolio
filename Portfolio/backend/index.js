@@ -13,7 +13,7 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.json({ message: "API is running" });
 })
-mongoose.connect(process.env.DATABASE_URL).then(()=>{
+mongoose.connect(process.env.DATABASE_URL, { dbName: 'Portfolio' }).then(()=>{
     console.log("connected to database");
 }).catch((error)=>{
     console.log(error);
