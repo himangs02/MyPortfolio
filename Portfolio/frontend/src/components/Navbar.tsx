@@ -19,7 +19,7 @@ export default function Navbar({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isHoveringTop, setIsHoveringTop] = useState(false);
 
-  const colors = ['#00FF66', '#00E5FF', '#FF0055', '#FFEB3B', '#B497CF'];
+  const colors = ['#00E5FF', '#FF0055', '#B497CF'];
   const shapes = ['square', 'circle', 'cross'] as const;
 
   useEffect(() => {
@@ -124,6 +124,24 @@ export default function Navbar({
                 aria-label={`Set cursor color to ${c}`}
               />
             ))}
+            
+            {/* Custom Color Picker */}
+            <div 
+              className={`relative flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all cursor-none overflow-hidden ${!colors.includes(cursorColor) ? 'scale-125 shadow-[0_0_8px_rgba(0,0,0,0.2)]' : 'border-transparent hover:scale-110'}`}
+              style={{ 
+                background: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
+                borderColor: !colors.includes(cursorColor) ? (document.documentElement.classList.contains('dark') ? 'white' : 'black') : 'transparent'
+              }}
+              title="Custom Color"
+            >
+              <input
+                type="color"
+                value={colors.includes(cursorColor) ? '#ffffff' : cursorColor}
+                onChange={(e) => setCursorColor(e.target.value)}
+                className="absolute inset-[-10px] w-[50px] h-[50px] opacity-0 cursor-none"
+                aria-label="Pick custom color"
+              />
+            </div>
             
             {/* Shape Divider */}
             {setCursorShape && (

@@ -12,7 +12,7 @@ import './App.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [cursorColor, setCursorColor] = useState('#00FF66');
+  const [cursorColor, setCursorColor] = useState('#00E5FF');
   const [cursorShape, setCursorShape] = useState<'square' | 'circle' | 'cross'>('square');
 
   useEffect(() => {

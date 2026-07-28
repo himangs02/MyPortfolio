@@ -1,120 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 export function LoaderThree() {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-[#0D1117] overflow-hidden">
-      <style>
-        {`
-          @keyframes drawBolt {
-            0% {
-              stroke-dasharray: 100;
-              stroke-dashoffset: 100;
-              fill: transparent;
-              transform: scale(0.8);
-            }
-            25% {
-              stroke-dasharray: 100;
-              stroke-dashoffset: 0;
-              fill: transparent;
-              transform: scale(1.2);
-            }
-            50% {
-              stroke-dasharray: 100;
-              stroke-dashoffset: 0;
-              fill: url(#splitBolt);
-              filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-              transform: scale(1) rotate(-8deg);
-            }
-            75% {
-              stroke-dasharray: 100;
-              stroke-dashoffset: 0;
-              fill: url(#splitBolt);
-              filter: drop-shadow(0 0 35px rgba(255, 215, 0, 1));
-              transform: scale(1.15) rotate(8deg);
-            }
-            100% {
-              stroke-dasharray: 100;
-              stroke-dashoffset: 100;
-              fill: transparent;
-              filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-              transform: scale(0.8) rotate(0deg);
-            }
-          }
-          
-          @keyframes shockwave {
-            0% {
-              transform: scale(0.5);
-              opacity: 1;
-              border-width: 4px;
-            }
-            100% {
-              transform: scale(3.5);
-              opacity: 0;
-              border-width: 0px;
-            }
-          }
+  const [textIndex, setTextIndex] = useState(0);
+  const loadingTexts = [
+    "WAKING UP DAEMONS...",
+    "REROUTING MAINFRAME...",
+    "CRACKING ICE...",
+    "INJECTING PAYLOAD...",
+    "ACCESS GRANTED."
+  ];
 
-          .animate-draw {
-            animation: drawBolt 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            transform-origin: center;
-          }
-          
-          .animate-shockwave {
-            animation: shockwave 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            border-color: rgba(255, 255, 255, 0.6);
-            border-style: solid;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 80px;
-            height: 80px;
-            margin-top: -40px;
-            margin-left: -40px;
-          }
-          
-          .animate-shockwave-delayed {
-            animation: shockwave 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            animation-delay: 0.2s;
-            border-color: rgba(255, 215, 0, 0.4);
-            border-style: solid;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 80px;
-            height: 80px;
-            margin-top: -40px;
-            margin-left: -40px;
-          }
-        `}
-      </style>
-      <div className="relative flex items-center justify-center">
-        {/* Shockwaves behind the bolt */}
-        <div className="animate-shockwave"></div>
-        <div className="animate-shockwave-delayed"></div>
-        
-        {/* The Bolt */}
-        <svg 
-          width="120" 
-          height="120" 
-          viewBox="0 0 24 24" 
-          stroke="white" 
-          strokeWidth="1"
-          className="relative z-10"
-        >
-          <defs>
-            <linearGradient id="splitBolt" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="50%" stopColor="#8B5A2B" />
-              <stop offset="50%" stopColor="transparent" />
-            </linearGradient>
-          </defs>
-          <path 
-            className="animate-draw"
-            d="M13 2 L3 14 L12 14 L11 22 L21 10 L12 10 Z" 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTextIndex(i => Math.min(i + 1, loadingTexts.length - 1));
+    }, 350);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-[#F4F4F0] dark:bg-[#0A0A0A] overflow-hidden font-mono p-4 transition-colors duration-0">
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0, rotate: -2 }}
+        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        className="relative bg-[#00E5FF] dark:bg-[#0A0A0A] border-4 border-black dark:border-white p-6 w-full max-w-md shadow-[12px_12px_0_0_#000] dark:shadow-[12px_12px_0_0_#fff]"
+      >
+        {/* Decorative corner blocks */}
+        <div className="absolute top-0 left-0 w-3 h-3 bg-black dark:bg-white" />
+        <div className="absolute top-0 right-0 w-3 h-3 bg-black dark:bg-white" />
+        <div className="absolute bottom-0 left-0 w-3 h-3 bg-black dark:bg-white" />
+        <div className="absolute bottom-0 right-0 w-3 h-3 bg-black dark:bg-white" />
+
+        <div className="border-b-4 border-black dark:border-white pb-4 mb-4 flex items-center justify-between">
+          <h2 className="text-xl sm:text-2xl font-black text-black dark:text-white uppercase tracking-tighter">System.Boot</h2>
+          <div className="animate-pulse w-4 h-4 bg-[#FF0055] border-2 border-black dark:border-white" />
+        </div>
+
+        <div className="flex flex-col gap-3 min-h-[140px]">
+          {loadingTexts.map((text, i) => (
+            <div 
+              key={i} 
+              className={`text-black dark:text-white font-bold text-sm sm:text-base flex items-center gap-2 ${i > textIndex ? 'opacity-0' : 'opacity-100'}`}
+            >
+              <span className="text-[#FF0055]">{'>'}</span> 
+              {text}
+              {i === textIndex && i !== loadingTexts.length - 1 && (
+                <span className="w-2.5 h-4 bg-black dark:bg-white inline-block animate-pulse" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 w-full h-8 border-4 border-black dark:border-white bg-white dark:bg-[#222] p-1">
+          <motion.div 
+            className="h-full bg-black dark:bg-white"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
           />
-        </svg>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
