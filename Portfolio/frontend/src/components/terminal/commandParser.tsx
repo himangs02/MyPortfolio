@@ -10,7 +10,10 @@ import {
   JOKES
 } from './terminalData';
 
-export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispatch<React.SetStateAction<any[]>>): React.ReactNode => {
+export const parseCommand = (
+  commandStr: string, 
+  setTerminalHistory: React.Dispatch<React.SetStateAction<any[]>>
+): React.ReactNode => {
   const args = commandStr.trim().split(' ').filter(Boolean);
   if (args.length === 0) return null;
 
@@ -142,6 +145,10 @@ export const parseCommand = (commandStr: string, setTerminalHistory: React.Dispa
           <span>This terminal cannot be closed.</span>
         </div>
       );
+
+    case 'play':
+      window.dispatchEvent(new Event('start-game'));
+      return <span className="text-[#00FF66]">Initializing Gamified Mode...</span>;
       
     case 'download':
       const link = document.createElement('a');

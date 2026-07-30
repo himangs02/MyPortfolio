@@ -108,6 +108,12 @@
   }
 }
 
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Hide default cursor globally with maximum aggression */
 html, body, *, *::before, *::after, *:hover, a, button, input, textarea, select, [role="button"] {
   cursor: none !important;

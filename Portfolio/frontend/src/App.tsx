@@ -8,10 +8,12 @@ import Work from './components/Work';
 import Contact from './components/Contact';
 import CursorGrid from './components/ui/CursorGrid';
 import CustomCursor from './components/CustomCursor';
+import GamifiedPortfolio from './components/GamifiedPortfolio';
 import './App.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isGameMode, setIsGameMode] = useState(false);
   const [cursorColor, setCursorColor] = useState('#00E5FF');
   const [cursorShape, setCursorShape] = useState<'square' | 'circle' | 'cross'>('square');
 
@@ -22,11 +24,25 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const handleStartGame = () => setIsGameMode(true);
+    window.addEventListener('start-game', handleStartGame);
+    return () => window.removeEventListener('start-game', handleStartGame);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.style.setProperty('--cursor-color', cursorColor);
   }, [cursorColor]);
 
   if (loading) {
     return <LoaderThreeDemo />;
+  }
+
+  if (isGameMode) {
+    return (
+      <div className="w-full h-[100svh] overflow-hidden bg-black text-white relative font-sans cursor-none selection:bg-[var(--cursor-color)] selection:text-black">
+        <GamifiedPortfolio onExit={() => setIsGameMode(false)} cursorColor={cursorColor} cursorShape={cursorShape} />
+      </div>
+    );
   }
 
   return (

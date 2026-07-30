@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import Terminal from './terminal/Terminal';
+import { LayoutTextFlip } from './ui/layout-text-flip';
 
 export default function Hero({ cursorColor = '#00FF66' }: { cursorColor?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -32,8 +33,12 @@ export default function Hero({ cursorColor = '#00FF66' }: { cursorColor?: string
         {/* Left Content */}
         <div className="flex-1 flex flex-col gap-4 sm:gap-6 text-center md:text-left z-10 w-full">
           <div>
-            <div className="inline-block bg-[#00FF66] text-black font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm px-2.5 sm:px-3 py-1 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-4 sm:mb-6 transform -rotate-2">
-              Welcome to my portfolio
+            <div className="flex items-center justify-center md:justify-start mb-4 sm:mb-6 transform -rotate-2">
+              <LayoutTextFlip 
+                text="Welcome to my"
+                words={["Portfolio", "Universe", "Playground", "Digital Space"]}
+                duration={2500}
+              />
             </div>
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-black leading-[1] tracking-tighter pb-1 sm:pb-2 text-white uppercase [text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,4px_4px_0_#FF0055] sm:[text-shadow:-2px_-2px_0_#000,0_-2px_0_#000,2px_-2px_0_#000,-2px_0_0_#000,2px_0_0_#000,-2px_2px_0_#000,0_2px_0_#000,2px_2px_0_#000,6px_6px_0_#FF0055]">
               Himangshu

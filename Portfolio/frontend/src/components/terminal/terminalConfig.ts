@@ -3,5 +3,5 @@ export const TERMINAL_CONFIG = {
   linkedin: "https://www.linkedin.com/in/himangshu-kumar-das-1349b6320/",
   portfolio: "https://yourportfolio.com",
   resume: "/Himangshu_Resume.pdf",
-  email: "your@email.com"
+  email: "himangshukumardas75695@gmail.com"
 };
