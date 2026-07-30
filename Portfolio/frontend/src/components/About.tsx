@@ -42,6 +42,7 @@ export default function About() {
                 'a Problem Solver'
               ]}
               duration={3000}
+              className="text-xl sm:text-2xl md:text-3xl"
             />
           </div>
           <div className="text-black dark:text-white whitespace-pre-wrap leading-relaxed text-base md:text-lg font-medium font-sans">
