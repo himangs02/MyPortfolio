@@ -294,10 +294,10 @@ export default function Terminal({ cursorColor = '#00E5FF' }: { cursorColor?: st
       {!isMinimized && (
         <div 
           ref={containerRef}
-          className={`p-4 md:p-6 font-mono text-xs md:text-sm leading-relaxed flex flex-col gap-2 md:gap-3 overflow-y-auto overflow-x-hidden scrollbar-hide ${isMaximized ? 'flex-1 h-full' : 'h-[300px] md:h-[400px]'}`}
+          className={`text-white p-4 md:p-6 font-mono text-xs md:text-sm leading-relaxed flex flex-col gap-2 md:gap-3 overflow-y-auto overflow-x-hidden scrollbar-hide ${isMaximized ? 'flex-1 h-full' : 'h-[300px] md:h-[400px]'}`}
         >
           {history.map((item) => (
-            <div key={item.id} className="animate-in fade-in slide-in-from-bottom-2 duration-200 w-full">
+            <div key={item.id} className="animate-in fade-in slide-in-from-bottom-2 duration-200 w-full !text-white">
               {item.output}
             </div>
           ))}

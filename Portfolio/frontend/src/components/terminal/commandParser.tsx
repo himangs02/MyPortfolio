@@ -22,7 +22,7 @@ export const parseCommand = (
   switch (command) {
     case 'help':
       return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 text-white">
           {AVAILABLE_COMMANDS.map((cmd) => (
             <span key={cmd}>{cmd}</span>
           ))}
@@ -31,7 +31,7 @@ export const parseCommand = (
 
     case 'about':
       return (
-        <div className="max-w-xl">
+        <div className="max-w-xl text-white">
           <p>
             I am a passionate developer focusing on modern web technologies. I love building intuitive,
             fast, and scalable applications. My aesthetic approach is heavily influenced by brutalism
@@ -42,7 +42,7 @@ export const parseCommand = (
 
     case 'skills':
       return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 text-white">
           {Object.entries(SKILLS_DATA).map(([category, skills]) => (
             <div key={category}>
               <span className="font-bold text-[#FFEB3B] underline">{category}</span>
@@ -58,7 +58,7 @@ export const parseCommand = (
 
     case 'projects':
       return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 text-white">
           {PROJECTS_DATA.map((project, index) => (
             <div key={index} className="flex flex-col gap-1 border-l-2 border-[#333] pl-4">
               <span className="font-bold text-[var(--cursor-color)] text-lg">{project.name}</span>
@@ -102,7 +102,7 @@ export const parseCommand = (
 
     case 'contact':
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-white">
           <span><span className="font-bold text-[#FF0055]">Email:</span> {TERMINAL_CONFIG.email}</span>
           <span><span className="font-bold text-[var(--cursor-color)]">LinkedIn:</span> {TERMINAL_CONFIG.linkedin}</span>
           <span><span className="font-bold text-[#00FF66]">GitHub:</span> {TERMINAL_CONFIG.github}</span>
@@ -112,15 +112,15 @@ export const parseCommand = (
 
     case 'github':
       window.open(TERMINAL_CONFIG.github, '_blank');
-      return <span>Opening GitHub in a new tab...</span>;
+      return <span className="text-white">Opening GitHub in a new tab...</span>;
 
     case 'linkedin':
       window.open(TERMINAL_CONFIG.linkedin, '_blank');
-      return <span>Opening LinkedIn in a new tab...</span>;
+      return <span className="text-white">Opening LinkedIn in a new tab...</span>;
 
     case 'resume':
       window.open(TERMINAL_CONFIG.resume, '_blank');
-      return <span>Opening Resume in a new tab...</span>;
+      return <span className="text-white">Opening Resume in a new tab...</span>;
 
     case 'clear':
       setTimeout(() => {
@@ -129,18 +129,18 @@ export const parseCommand = (
       return null;
 
     case 'time':
-      return <span>{new Date().toLocaleTimeString()}</span>;
+      return <span className="text-white">{new Date().toLocaleTimeString()}</span>;
 
     case 'joke':
       const randomJoke = JOKES[Math.floor(Math.random() * JOKES.length)];
       return <span className="text-[var(--cursor-color)]">{randomJoke}</span>;
 
     case 'weather':
-      return <span>Currently: 22°C, mostly sunny with a chance of bugs.</span>;
+      return <span className="text-white">Currently: 22°C, mostly sunny with a chance of bugs.</span>;
 
     case 'exit':
       return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 text-white">
           <span>Nice try 🙂</span>
           <span>This terminal cannot be closed.</span>
         </div>
